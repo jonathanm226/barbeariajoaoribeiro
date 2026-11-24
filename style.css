@@ -1,121 +1,880 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111713">
+  <meta name="robots" content="noindex">
+  <title>Painel da equipe | Barbearia João Ribeiro</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
 
-:root {
-  color-scheme: dark;
-  --bg: #111713;
-  --surface: #19211c;
-  --surface-raised: #202a23;
-  --line: rgba(224, 206, 166, .2);
-  --gold: #cfb477;
-  --gold-light: #ead9ad;
-  --cream: #f2eee5;
-  --muted: #a9ada3;
-  --danger: #e78378;
-  --success: #8bc7a0;
-  --sans: "DM Sans", "Segoe UI", sans-serif;
-  --serif: "Playfair Display", Georgia, serif;
-  --content: 1180px;
-}
+    :root {
+      color-scheme: dark;
+      --bg: #0e1310;
+      --surface: #171f1a;
+      --surface-raised: #1e2822;
+      --surface-dark: #111713;
+      --line: rgba(224, 206, 166, .18);
+      --line-strong: rgba(224, 206, 166, .35);
+      --gold: #cfb477;
+      --gold-light: #ead9ad;
+      --cream: #f2eee5;
+      --muted: #a9ada3;
+      --danger: #e78378;
+      --success: #8bc7a0;
+      --sans: "DM Sans", "Segoe UI", sans-serif;
+      --serif: "Playfair Display", Georgia, serif;
+    }
 
-* { box-sizing: border-box; }
-[hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--cream);
-  font-family: var(--sans);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
-img { display: block; max-width: 100%; }
-a { color: inherit; }
-button, input, select { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
-button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-.container { width: min(var(--content), calc(100% - 44px)); margin-inline: auto; }
-.serif { font-family: var(--serif); }
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--gold);
-  font-size: .73rem;
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-.eyebrow::before { width: 23px; height: 1px; background: currentColor; content: ""; }
-h1, h2, h3, p { margin-top: 0; }
-h1, h2, h3 { font-family: var(--serif); font-weight: 500; }
-h1 { font-size: clamp(3rem, 6vw, 5.8rem); line-height: 1.02; letter-spacing: -.045em; }
-h2 { font-size: clamp(2.1rem, 4vw, 3.35rem); line-height: 1.12; }
-p { color: var(--muted); }
-.button {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 22px;
-  border: 1px solid var(--gold);
-  border-radius: 3px;
-  background: var(--gold);
-  color: #141711;
-  font-size: .9rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background .2s, color .2s, transform .2s;
-}
-.button:hover { transform: translateY(-2px); background: var(--gold-light); }
-.button-outline { background: transparent; color: var(--gold-light); }
-.button-outline:hover { background: rgba(207, 180, 119, .12); color: var(--gold-light); }
-.notice {
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: rgba(207, 180, 119, .08);
-  color: var(--gold-light);
-  font-size: .9rem;
-}
-.notice.error { border-color: rgba(231, 131, 120, .4); color: #f3b1a9; }
-.notice[hidden] { display: none; }
+    * { box-sizing: border-box; }
+    [hidden], .auth-wrap[hidden], #login-view[hidden], #dashboard-view[hidden] {
+      display: none !important;
+    }
 
-.site-header {
-  position: sticky;
-  z-index: 20;
-  top: 0;
-  border-bottom: 1px solid var(--line);
-  background: rgba(17, 23, 19, .94);
-  backdrop-filter: blur(14px);
-}
-.header-inner { display: flex; min-height: 78px; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; }
-.brand-mark {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border: 1px solid rgba(207, 180, 119, .62);
-  border-radius: 50%;
-  color: var(--gold);
-  font-family: var(--serif);
-  font-size: .9rem;
-  font-weight: 700;
-  letter-spacing: -.08em;
-}
-.brand-name { font-family: var(--serif); font-size: 1.05rem; letter-spacing: .02em; }
-.brand-sub { display: block; color: var(--muted); font-family: var(--sans); font-size: .61rem; letter-spacing: .17em; text-transform: uppercase; }
-.main-nav { display: flex; align-items: center; gap: 27px; }
-.main-nav a { color: var(--muted); font-size: .84rem; text-decoration: none; transition: color .2s; }
-.main-nav a:hover { color: var(--gold-light); }
-.menu-toggle {
-  display: none;
-  min-height: 42px;
-  padding: 0 13px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  background
+    body.panel-page {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: var(--sans);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    p { margin-top: 0; color: var(--muted); }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+
+    .panel-shell {
+      width: min(1280px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    /* Botões e avisos */
+    .button {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 18px;
+      border: 1px solid var(--gold);
+      border-radius: 4px;
+      background: var(--gold);
+      color: #141711;
+      font-size: .86rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .18s, transform .18s;
+    }
+    .button:hover:not(:disabled) {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+    .button:disabled { opacity: .5; cursor: not-allowed; }
+    .button-outline {
+      background: transparent;
+      color: var(--gold-light);
+    }
+    .button-outline:hover:not(:disabled) {
+      background: rgba(207, 180, 119, .12);
+    }
+
+    .notice {
+      margin-bottom: 16px;
+      padding: 13px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: rgba(207, 180, 119, .08);
+      color: var(--gold-light);
+      font-size: .88rem;
+    }
+    .notice.error {
+      border-color: rgba(231, 131, 120, .45);
+      background: rgba(231, 131, 120, .08);
+      color: #f3b1a9;
+    }
+
+    /* Marca */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      place-items: center;
+      border: 1px solid rgba(207, 180, 119, .62);
+      border-radius: 50%;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: -.06em;
+    }
+    .brand-name {
+      font-family: var(--serif);
+      font-size: 1.08rem;
+    }
+    .brand-sub {
+      display: block;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: .64rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    /* Tela de Login */
+    .auth-wrap {
+      display: grid;
+      min-height: calc(100vh - 88px);
+      place-items: center;
+      padding: 20px 0;
+    }
+    .auth-card {
+      width: min(100%, 430px);
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .auth-card h1 {
+      margin: 16px 0 10px;
+      font-size: 1.95rem;
+      line-height: 1.15;
+    }
+    .auth-card > p {
+      font-size: .87rem;
+      line-height: 1.6;
+    }
+    .auth-card .field { margin-top: 15px; }
+    .auth-card .button {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 20px;
+    }
+
+    /* Cabeçalho do Painel */
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      padding: 16px 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .panel-header h1 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+    .panel-header p {
+      margin: 2px 0 0;
+      font-size: .8rem;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .user-badge {
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-dark);
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    /* Navegação por Abas */
+    .panel-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .panel-tab {
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .18s;
+    }
+    .panel-tab:hover {
+      border-color: var(--line-strong);
+      color: var(--cream);
+    }
+    .panel-tab.active {
+      border-color: var(--gold);
+      background: rgba(207, 180, 119, .14);
+      color: var(--gold-light);
+    }
+
+    /* Cards e Seções */
+    .panel-card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .panel-section {
+      margin-top: 22px;
+    }
+    .panel-section h2 {
+      margin-bottom: 6px;
+      font-size: 1.45rem;
+    }
+
+    /* Barra de Filtros e Navegação da Semana */
+    .panel-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .toolbar-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .week-pill {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-dark);
+      color: var(--gold-light);
+      font-size: .86rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Indicadores (KPIs) */
+    .panel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    #payment-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .metric {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-dark);
+    }
+    .metric.highlight {
+      border-top: 2px solid var(--gold);
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+    .metric strong {
+      display: block;
+      margin-top: 8px;
+      color: var(--gold-light);
+      font-size: 1.4rem;
+      font-variant-numeric: tabular-nums;
+    }
+    #payment-metrics .metric strong {
+      font-size: 1.15rem;
+      color: var(--cream);
+    }
+    .sensitive.is-hidden {
+      filter: blur(6px);
+      user-select: none;
+    }
+
+    /* Tabelas */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-dark);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+    .data-table th,
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+    .data-table tr:last-child td { border-bottom: 0; }
+    .data-table th {
+      background: rgba(207, 180, 119, .06);
+      color: var(--gold);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    #barber-report .data-table th:not(:first-child),
+    #barber-report .data-table td:not(:first-child) {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Agenda da Semana */
+    .schedule-list {
+      display: grid;
+      gap: 22px;
+      margin-top: 16px;
+    }
+    .schedule-list > .panel-section {
+      margin-top: 0;
+    }
+    .schedule-list h3 {
+      margin: 0 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      text-transform: capitalize;
+    }
+    .appointment-card {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 10px;
+      padding: 15px 18px;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--gold);
+      border-radius: 5px;
+      background: var(--surface-dark);
+    }
+    .appointment-card:last-child { margin-bottom: 0; }
+    .appointment-time {
+      padding: 8px 6px;
+      border: 1px solid rgba(207, 180, 119, .35);
+      border-radius: 4px;
+      background: rgba(207, 180, 119, .08);
+      color: var(--gold-light);
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .appointment-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .appointment-info > strong {
+      color: var(--cream);
+      font-size: 1rem;
+    }
+    .appointment-info > span {
+      display: block;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+    .appointment-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .payment-select {
+      width: auto !important;
+      min-width: 110px;
+      min-height: 36px !important;
+      padding: 6px 10px !important;
+      font-size: .8rem;
+    }
+    .small-button {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: var(--surface-raised);
+      color: var(--cream);
+      font-size: .78rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .small-button:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+    .small-button.danger {
+      border-color: rgba(231, 131, 120, .35);
+      color: var(--danger);
+    }
+
+    /* Badges de Status */
+    .status {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .04);
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .status.confirmado {
+      border-color: rgba(139, 199, 160, .4);
+      background: rgba(139, 199, 160, .12);
+      color: var(--success);
+    }
+    .status.concluido {
+      border-color: rgba(207, 180, 119, .45);
+      background: rgba(207, 180, 119, .14);
+      color: var(--gold-light);
+    }
+    .status.cancelado {
+      border-color: rgba(231, 131, 120, .4);
+      background: rgba(231, 131, 120, .12);
+      color: var(--danger);
+    }
+
+    /* Formulários */
+    .panel-forms-row {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      margin-top: 22px;
+      align-items: start;
+    }
+    .panel-forms-row > .panel-section {
+      margin-top: 0;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field.full { grid-column: 1 / -1; }
+    .field label {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 500;
+    }
+    .field input,
+    .field select,
+    .panel-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-dark);
+      color: var(--cream);
+    }
+    .field input:focus,
+    .field select:focus,
+    .panel-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .field input:disabled,
+    .field select:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .choice-card {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface-dark);
+      cursor: pointer;
+    }
+    .choice-card:hover { border-color: var(--gold); }
+    .choice-card strong { font-size: .86rem; color: var(--cream); }
+    .choice-card span { font-size: .76rem; color: var(--muted); }
+
+    .empty-state {
+      padding: 28px;
+      border: 1px dashed var(--line);
+      border-radius: 5px;
+      color: var(--muted);
+      text-align: center;
+      font-size: .9rem;
+    }
+
+    /* Modal de Reagendamento */
+    dialog.modal {
+      width: min(100%, 480px);
+      padding: 24px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--cream);
+    }
+    dialog.modal::backdrop {
+      background: rgba(0, 0, 0, .78);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .modal-header h2 { margin: 0; font-size: 1.4rem; }
+    .modal-close {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 960px) {
+      #payment-metrics { grid-template-columns: repeat(2, 1fr); }
+      .panel-forms-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .panel-shell { width: calc(100% - 24px); padding-top: 16px; }
+      .panel-header { flex-direction: column; align-items: flex-start; }
+      .header-actions { width: 100%; justify-content: space-between; }
+      .panel-grid { grid-template-columns: 1fr; }
+      #payment-metrics { grid-template-columns: 1fr 1fr; }
+      .appointment-card { grid-template-columns: 70px minmax(0, 1fr); }
+      .appointment-actions { grid-column: 1 / -1; justify-content: flex-start; }
+      .form-grid, .choice-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+</head>
+<body class="panel-page">
+  <main class="panel-shell">
+    <section id="login-view" class="auth-wrap">
+      <form class="auth-card" id="login-form">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">JR</span>
+          <span class="brand-name">Barbearia João Ribeiro<span class="brand-sub">Painel da equipe</span></span>
+        </a>
+        <h1>Acesso ao painel</h1>
+        <p>Demonstração: usuário <strong>joao</strong>, senha <strong>admin123</strong>. Este acesso mostra apenas dados fictícios, sem gravá-los no Supabase. Para administrar dados reais, entre com uma conta do Supabase.</p>
+        <div id="login-message" class="notice error" role="status" hidden></div>
+        <div class="field">
+          <label for="login-email">E-mail ou usuário</label>
+          <input id="login-email" type="text" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Senha</label>
+          <input id="login-password" type="password" autocomplete="current-password" required>
+        </div>
+        <button id="login-submit" class="button" type="submit">Entrar no painel</button>
+        <p style="margin:17px 0 0; font-size:.78rem;"><a href="index.html">Voltar ao site</a></p>
+      </form>
+    </section>
+
+    <section id="dashboard-view" hidden>
+      <header class="panel-header">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">JR</span>
+          <div>
+            <h1>Barbearia João Ribeiro</h1>
+            <p id="panel-role-label">Painel da equipe</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span id="panel-user-name" class="user-badge"></span>
+          <button id="logout-button" class="button button-outline" type="button">Sair</button>
+        </div>
+      </header>
+
+      <div id="panel-message" class="notice" role="status" hidden></div>
+      <div id="demo-banner" class="notice" role="status" hidden>Modo demonstração: dados fictícios e alterações desativadas. Nada é gravado no Supabase.</div>
+
+      <nav class="panel-nav" aria-label="Seções do painel">
+        <button class="panel-tab active" type="button" data-panel-tab="agenda-pane">Agenda</button>
+        <button class="panel-tab admin-only" type="button" data-panel-tab="settings-pane" hidden>Configurações</button>
+      </nav>
+
+      <section id="agenda-pane" data-panel-pane>
+        <div class="panel-card">
+          <div class="panel-toolbar">
+            <div class="field" style="min-width:210px;">
+              <label for="barber-filter">Filtrar por barbeiro</label>
+              <select id="barber-filter" class="panel-input"></select>
+            </div>
+            <div class="toolbar-group">
+              <button id="previous-week" class="button button-outline" type="button">← Anterior</button>
+              <strong id="week-label" class="week-pill"></strong>
+              <button id="next-week" class="button button-outline" type="button">Próxima →</button>
+            </div>
+            <div class="toolbar-group">
+              <button id="refresh-agenda" class="button" type="button">Atualizar</button>
+              <button id="privacy-toggle" class="button button-outline" type="button" aria-pressed="false">Ocultar valores</button>
+            </div>
+          </div>
+
+          <div class="panel-grid">
+            <div class="metric"><span>Agendamentos não cancelados</span><strong id="metric-appointments">0</strong></div>
+            <div class="metric"><span>Atendimentos concluídos</span><strong id="metric-completed">0</strong></div>
+            <div class="metric highlight"><span>Faturamento concluído</span><strong id="metric-revenue" class="sensitive">R$ 0,00</strong></div>
+          </div>
+          <div id="payment-metrics"></div>
+          <div id="admin-breakdown" class="panel-section admin-only" hidden>
+            <h2>Resumo por barbeiro</h2>
+            <div id="barber-report" class="table-wrap"></div>
+          </div>
+        </div>
+
+        <div class="panel-section panel-card">
+          <h2>Agenda da semana</h2>
+          <p>Agendamentos e bloqueios do período selecionado.</p>
+          <div id="schedule-list" class="schedule-list" aria-live="polite">
+            <div class="empty-state">Carregando agenda...</div>
+          </div>
+        </div>
+
+        <div class="panel-forms-row">
+          <div class="panel-section panel-card">
+            <h2>Adicionar agendamento</h2>
+            <p>Registre atendimentos feitos por telefone ou presencialmente.</p>
+            <form id="manual-form" class="form-grid">
+              <div class="field admin-only" hidden>
+                <label for="manual-barber">Barbeiro</label>
+                <select id="manual-barber" class="panel-input"></select>
+              </div>
+              <div class="field">
+                <label for="manual-date">Data</label>
+                <input id="manual-date" class="panel-input" type="date" required>
+              </div>
+              <div class="field">
+                <label for="manual-time">Horário</label>
+                <input id="manual-time" class="panel-input" type="time" required>
+              </div>
+              <div class="field">
+                <label for="manual-client">Nome do cliente</label>
+                <input id="manual-client" class="panel-input" maxlength="120" required>
+              </div>
+              <div class="field">
+                <label for="manual-phone">Telefone</label>
+                <input id="manual-phone" class="panel-input" type="tel" maxlength="24" placeholder="Opcional">
+              </div>
+              <div class="field full">
+                <label>Serviços</label>
+                <div id="manual-services" class="choice-grid"></div>
+                <p id="manual-total" style="margin:8px 0 0; color:var(--gold-light); font-weight:600;"></p>
+              </div>
+              <div class="field full">
+                <button id="manual-submit" class="button" type="submit">Salvar agendamento</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel-section panel-card">
+            <h2>Bloquear horário</h2>
+            <p>Bloqueie um intervalo ou feche a agenda de um dia inteiro.</p>
+            <form id="block-form" class="form-grid">
+              <div class="field admin-only" hidden>
+                <label for="block-barber">Barbeiro</label>
+                <select id="block-barber" class="panel-input"></select>
+              </div>
+              <div class="field">
+                <label for="block-date">Data</label>
+                <input id="block-date" class="panel-input" type="date" required>
+              </div>
+              <div class="field">
+                <label for="block-reason">Motivo (opcional)</label>
+                <input id="block-reason" class="panel-input" maxlength="120">
+              </div>
+              <div class="field">
+                <label for="block-start">Início</label>
+                <input id="block-start" class="panel-input" type="time">
+              </div>
+              <div class="field">
+                <label for="block-end">Fim</label>
+                <input id="block-end" class="panel-input" type="time">
+              </div>
+              <label class="field full" style="flex-direction:row; align-items:center; gap:9px; color:var(--muted); font-size:.84rem;">
+                <input id="block-full-day" type="checkbox" style="width:auto; min-height:auto; accent-color:var(--gold);">
+                Bloquear o dia inteiro
+              </label>
+              <div class="field full">
+                <button class="button" type="submit">Adicionar bloqueio</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="settings-pane" data-panel-pane hidden>
+        <div class="panel-card">
+          <h2>Serviços e preços</h2>
+          <form id="service-form" class="form-grid">
+            <div class="field">
+              <label for="service-name">Nome do serviço</label>
+              <input id="service-name" class="panel-input" maxlength="120" required>
+            </div>
+            <div class="field">
+              <label for="service-price">Preço (R$)</label>
+              <input id="service-price" class="panel-input" type="number" min="0" step="0.01" required>
+            </div>
+            <div class="field">
+              <label for="service-duration">Duração (minutos)</label>
+              <input id="service-duration" class="panel-input" type="number" min="15" max="480" step="15" required>
+            </div>
+            <div class="field" style="justify-content:end;">
+              <button class="button" type="submit">Cadastrar serviço</button>
+            </div>
+          </form>
+          <div id="service-settings-list" class="table-wrap panel-section"></div>
+        </div>
+
+        <div class="panel-section panel-card">
+          <h2>Barbeiros</h2>
+          <form id="barber-form" class="form-grid">
+            <div class="field">
+              <label for="barber-name">Nome</label>
+              <input id="barber-name" class="panel-input" maxlength="120" required>
+            </div>
+            <div class="field">
+              <label for="barber-phone">Telefone</label>
+              <input id="barber-phone" class="panel-input" type="tel" maxlength="24">
+            </div>
+            <div class="field" style="justify-content:end;">
+              <button class="button" type="submit">Adicionar barbeiro</button>
+            </div>
+          </form>
+          <div id="barber-settings-list" class="table-wrap panel-section"></div>
+          <p style="margin:12px 0 0; font-size:.78rem;">Para liberar o painel de outro barbeiro, crie a conta dele no Supabase Authentication e associe-a em <code>joao_membros</code>, conforme o SQL.</p>
+        </div>
+
+        <div class="panel-section panel-card">
+          <h2>Expediente por barbeiro</h2>
+          <p>Configure cada dia da semana. O sistema não presume horários de funcionamento.</p>
+          <form id="hours-form" class="form-grid">
+            <div class="field">
+              <label for="hours-barber">Barbeiro</label>
+              <select id="hours-barber" class="panel-input" required></select>
+            </div>
+            <div class="field">
+              <label for="hours-day">Dia da semana</label>
+              <select id="hours-day" class="panel-input" required>
+                <option value="1">Segunda-feira</option>
+                <option value="2">Terça-feira</option>
+                <option value="3">Quarta-feira</option>
+                <option value="4">Quinta-feira</option>
+                <option value="5">Sexta-feira</option>
+                <option value="6">Sábado</option>
+                <option value="7">Domingo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="hours-start">Abertura</label>
+              <input id="hours-start" class="panel-input" type="time" required>
+            </div>
+            <div class="field">
+              <label for="hours-end">Fechamento</label>
+              <input id="hours-end" class="panel-input" type="time" required>
+            </div>
+            <div class="field">
+              <label for="hours-interval">Intervalo entre horários (minutos)</label>
+              <input id="hours-interval" class="panel-input" type="number" min="15" max="180" step="15" value="30" required>
+            </div>
+            <div class="field" style="justify-content:end;">
+              <button class="button" type="submit">Salvar expediente</button>
+            </div>
+          </form>
+          <div id="hours-settings-list" class="table-wrap panel-section"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="reschedule-dialog" class="modal">
+    <form id="reschedule-form">
+      <div class="modal-header">
+        <h2>Reagendar atendimento</h2>
+        <button id="close-reschedule" class="modal-close" type="button" aria-label="Fechar">×</button>
+      </div>
+      <input id="reschedule-id" type="hidden">
+      <div class="form-grid">
+        <div class="field">
+          <label for="reschedule-date">Nova data</label>
+          <input id="reschedule-date" class="panel-input" type="date" required>
+        </div>
+        <div class="field">
+          <label for="reschedule-time">Novo horário</label>
+          <input id="reschedule-time" class="panel-input" type="time" required>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="button" type="submit">Salvar novo horário</button>
+        <button id="cancel-reschedule" class="button button-outline" type="button">Voltar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="painel.js"></script>
+</body>
+</html>
