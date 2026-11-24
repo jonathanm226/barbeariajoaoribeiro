@@ -7,6 +7,62 @@
   <meta name="robots" content="noindex">
   <title>Painel da equipe | Barbearia João Ribeiro</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    [hidden], .auth-wrap[hidden], #login-view[hidden], #dashboard-view[hidden] {
+      display: none !important;
+    }
+    .auth-wrap {
+      display: grid;
+      min-height: calc(100vh - 85px);
+      place-items: center;
+      padding: 24px 0;
+    }
+    .auth-card {
+      width: min(100%, 430px);
+      padding: 32px;
+      border: 1px solid rgba(224, 206, 166, .2);
+      border-radius: 4px;
+      background: #19211c;
+    }
+    .auth-card h1 {
+      margin: 16px 0 10px;
+      font-size: 2rem;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+    .auth-card > p {
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+    .auth-card .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 15px;
+    }
+    .auth-card .field label {
+      color: #a9ada3;
+      font-size: .82rem;
+    }
+    .auth-card .field input {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid rgba(224, 206, 166, .2);
+      border-radius: 3px;
+      background: #111713;
+      color: #f2eee5;
+    }
+    .auth-card .field input:focus {
+      outline: none;
+      border-color: #cfb477;
+    }
+    .auth-card .button {
+      width: 100%;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
   <script src="supabase-client.js"></script>
