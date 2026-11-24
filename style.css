@@ -118,40 +118,4 @@ p { color: var(--muted); }
   padding: 0 13px;
   border: 1px solid var(--line);
   border-radius: 3px;
-  background: var(--surface);
-  color: var(--cream);
-  cursor: pointer;
-}
-
-.hero {
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 82% 25%, rgba(207, 180, 119, .14), transparent 34%),
-    linear-gradient(115deg, #121813 0%, #171e18 54%, #111713 100%);
-}
-.hero::after {
-  position: absolute;
-  top: 0;
-  right: 3%;
-  width: 29%;
-  height: 100%;
-  background: repeating-linear-gradient(135deg, transparent 0 24px, rgba(207, 180, 119, .045) 24px 42px, transparent 42px 66px);
-  content: "";
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  min-height: 640px;
-  grid-template-columns: 1.08fr .92fr;
-  align-items: center;
-  gap: 7%;
-  padding-block: 70px;
-}
-.hero-copy h1 { max-width: 700px; margin: 18px 0 20px; }
-.hero-copy h1 em { color: var(--gold); font-weight: 500; }
-.hero-copy > p { max-width: 490px; margin-bottom: 27px; font-size: 1.02rem; line-height: 1.85; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-contact { display: inline-flex; align-items: center; gap: 9px; margin-top:
+  background
