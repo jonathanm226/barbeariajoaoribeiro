@@ -29,6 +29,22 @@ function clearMessage(element) {
   element.hidden = true;
 }
 
+function showDashboardScreen() {
+  loginView.hidden = true;
+  loginView.style.display = "none";
+  dashboardView.hidden = false;
+  dashboardView.style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function showLoginScreen() {
+  dashboardView.hidden = true;
+  dashboardView.style.display = "none";
+  loginView.hidden = false;
+  loginView.style.display = "";
+  window.scrollTo(0, 0);
+}
+
 function stopDemoMutation(event) {
   if (!demoMode) return false;
   event.preventDefault();
@@ -109,7 +125,12 @@ function enableRoleFeatures() {
   document.querySelectorAll(".admin-only").forEach((element) => {
     element.hidden = !isAdmin();
   });
-  document.getElementById("settings-pane").hidden = !isAdmin();
+  document.querySelectorAll("[data-panel-tab]").forEach((button) => {
+    button.classList.toggle("active", button.dataset.panelTab === "agenda-pane");
+  });
+  document.querySelectorAll("[data-panel-pane]").forEach((pane) => {
+    pane.hidden = pane.id !== "agenda-pane";
+  });
   document.getElementById("panel-role-label").textContent = isAdmin()
     ? "Painel administrativo"
     : "Agenda do barbeiro";
@@ -136,8 +157,7 @@ async function establishSession(user) {
   currentUser = user;
   currentMember = member;
   document.getElementById("panel-user-name").textContent = user.email || "Equipe";
-  loginView.hidden = true;
-  dashboardView.hidden = false;
+  showDashboardScreen();
   enableRoleFeatures();
 
   const { data: barberRows, error: barberError } = await db
@@ -253,8 +273,7 @@ async function establishDemoSession() {
   clearMessage(loginMessage);
   document.getElementById("demo-banner").hidden = false;
   document.getElementById("panel-user-name").textContent = "Acesso de demonstração";
-  loginView.hidden = true;
-  dashboardView.hidden = false;
+  showDashboardScreen();
   enableRoleFeatures();
   populateBarberControls();
 
@@ -1060,8 +1079,7 @@ document.getElementById("logout-button").addEventListener("click", async () => {
     demoAppointments = [];
     demoBlocks = [];
     document.getElementById("demo-banner").hidden = true;
-    dashboardView.hidden = true;
-    loginView.hidden = false;
+    showLoginScreen();
     loginForm.reset();
     clearMessage(loginMessage);
     return;
@@ -1073,8 +1091,8 @@ document.getElementById("logout-button").addEventListener("click", async () => {
   }
   currentUser = null;
   currentMember = null;
-  dashboardView.hidden = true;
-  loginView.hidden = false;
+  showLoginScreen();
+  loginForm.reset();
 });
 
 async function startPanel() {
