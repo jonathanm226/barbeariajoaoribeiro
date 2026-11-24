@@ -1,0 +1,8 @@
+{
+  "name": "Barbearia João Ribeiro",
+  "short_name": "João Ribeiro",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#111713",
+  "theme_color": "#111713"
+}

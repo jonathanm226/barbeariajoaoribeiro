@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111713">
+  <meta name="description" content="Agende seu horário na Barbearia João Ribeiro, em Jardim das Alterosas, Betim.">
+  <title>Agendar | Barbearia João Ribeiro</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="supabase-client.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">JR</span>
+        <span class="brand-name">Barbearia João Ribeiro<span class="brand-sub">Agendamento online</span></span>
+      </a>
+      <a class="button button-outline" href="index.html">Voltar ao início</a>
+    </div>
+  </header>
+
+  <main class="container section">
+    <div class="section-heading">
+      <span class="eyebrow">Reserve seu horário</span>
+      <h1 style="font-size:clamp(2.5rem,5vw,4rem);">Agendamento</h1>
+      <p>Selecione barbeiro, serviços e um horário disponível. Sua solicitação fica registrada e aguardará confirmação da barbearia.</p>
+    </div>
+
+    <div id="booking-notice" class="notice error" role="status" hidden></div>
+    <div class="booking-layout" id="booking-content">
+      <form class="booking-main" id="booking-form">
+        <section class="booking-step">
+          <h2>1. Escolha o profissional</h2>
+          <div class="field">
+            <label for="barber-select">Barbeiro</label>
+            <select id="barber-select" required disabled>
+              <option value="">Carregando barbeiros...</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="booking-step">
+          <h2>2. Escolha um ou mais serviços</h2>
+          <div id="service-options" class="choice-grid" aria-live="polite">
+            <p class="notice">Carregando serviços...</p>
+          </div>
+        </section>
+
+        <section class="booking-step">
+          <h2>3. Selecione a data e o horário</h2>
+          <div class="field" style="max-width:320px; margin-bottom:15px;">
+            <label for="booking-date">Data (até 21 dias à frente)</label>
+            <input id="booking-date" type="date" required disabled>
+          </div>
+          <div id="time-options" class="time-grid" aria-live="polite">
+            <p class="notice">Escolha um barbeiro, serviço e data.</p>
+          </div>
+        </section>
+
+        <section class="booking-step">
+          <h2>4. Seus dados</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label for="client-name">Nome completo</label>
+              <input id="client-name" name="name" type="text" autocomplete="name" maxlength="120" required>
+            </div>
+            <div class="field">
+              <label for="client-phone">Telefone com DDD</label>
+              <input id="client-phone" name="tel" type="tel" autocomplete="tel" placeholder="(31) 99999-9999" maxlength="24" required>
+            </div>
+          </div>
+        </section>
+        <button id="submit-booking" class="button" type="submit" disabled>Solicitar agendamento</button>
+      </form>
+
+      <aside class="booking-summary" aria-live="polite">
+        <span class="eyebrow">Resumo</span>
+        <h2>Seu horário</h2>
+        <div class="summary-row"><span>Barbeiro</span><strong id="summary-barber">—</strong></div>
+        <div class="summary-row"><span>Serviços</span><strong id="summary-services">Selecione serviços</strong></div>
+        <div class="summary-row"><span>Data e hora</span><strong id="summary-datetime">—</strong></div>
+        <div class="summary-total"><span>Total estimado</span><strong id="summary-total">R$ 0,00</strong></div>
+        <p style="font-size:.77rem;">O horário só será confirmado após o retorno da equipe.</p>
+      </aside>
+    </div>
+
+    <section id="booking-success" class="panel-card" hidden>
+      <span class="eyebrow">Solicitação registrada</span>
+      <h2>Obrigado por escolher o João Ribeiro.</h2>
+      <p id="success-details"></p>
+      <p>A solicitação foi salva na agenda. Entre em contato para confirmar o atendimento.</p>
+      <div class="hero-actions">
+        <a id="whatsapp-confirmation" class="button" href="#" target="_blank" rel="noopener noreferrer">Falar com a barbearia pelo WhatsApp</a>
+        <a class="button button-outline" href="index.html">Voltar ao início</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>Barbearia João Ribeiro · João Ribeiro</span>
+      <a href="tel:+5531992512693">+55 (31) 99251-2693</a>
+    </div>
+  </footer>
+  <script src="agendar.js"></script>
+</body>
+</html>
